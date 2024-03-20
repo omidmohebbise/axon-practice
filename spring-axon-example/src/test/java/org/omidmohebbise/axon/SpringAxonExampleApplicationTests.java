@@ -1,4 +1,4 @@
-package org.omidmohebbise.springaxonexample;
+package org.omidmohebbise.axon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

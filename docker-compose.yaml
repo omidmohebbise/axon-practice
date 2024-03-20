@@ -6,3 +6,14 @@ services:
     ports:
       - "8024:8024"
       - "8124:8124"
+  db:
+    image: postgres:16-alpine
+    container_name: database
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=axon_db
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=test
+    ports:
+      - "5432:5432"
