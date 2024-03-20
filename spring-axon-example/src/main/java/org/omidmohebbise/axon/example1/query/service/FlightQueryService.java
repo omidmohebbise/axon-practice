@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.queryhandling.QueryHandler;
 import org.omidmohebbise.axon.example1.event.FlightCreatedEvent;
+import org.omidmohebbise.axon.example1.event.FlightUpdatedEvent;
 import org.omidmohebbise.axon.example1.query.FlightBasicQuery;
 import org.omidmohebbise.axon.example1.query.model.FlightEntity;
 import org.omidmohebbise.axon.example1.query.model.repository.FlightRepo;
@@ -35,6 +36,14 @@ public class FlightQueryService {
                 .build());
     }
 
+    @EventSourcingHandler
+    public void on(FlightUpdatedEvent event) {
+       FlightEntity flightEntity = repository.findByFlightId(event.getFlightId());
+       flightEntity.setDeparture(flightEntity.getDeparture().plusMinutes(event.getDelay()));
+       flightEntity.setArrival(flightEntity.getArrival().plusMinutes(event.getDelay()));
+       repository.save(flightEntity);
+    }
+
     @QueryHandler
     public List<FlightEntity> findAllFlights(FlightBasicQuery flightBasicQuery){
         return repository.findAll(
@@ -42,4 +51,6 @@ public class FlightQueryService {
                 30,Sort.by(Sort.Direction.DESC,"id"))).getContent();
 
     }
+
+
 }

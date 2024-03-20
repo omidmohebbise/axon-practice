@@ -3,11 +3,13 @@ package org.omidmohebbise.axon.example1.command.service;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.omidmohebbise.axon.example1.command.CreateFlightCommand;
+import org.omidmohebbise.axon.example1.command.UpdateFlightCommand;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
+import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +21,11 @@ public class FlightService{
 
     private final CommandGateway commandGateway;
     private final List<String> airports = List.of("IST", "AMS", "IKH", "ISF", "TNK","NYC", "LAX", "LHR", "CDG", "SYD");
+
+    public void delay(UpdateFlightCommand updateFlightCommand){
+        commandGateway.send(updateFlightCommand);
+    }
+
 
     @Scheduled( fixedRate = 5000)
     public void timer(){

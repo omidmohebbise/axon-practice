@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FlightRepo extends JpaRepository<FlightEntity,Long> {
+    FlightEntity findByFlightId(String flightId);
 }
