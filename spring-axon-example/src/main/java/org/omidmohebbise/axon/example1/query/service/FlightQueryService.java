@@ -8,7 +8,6 @@ import org.omidmohebbise.axon.example1.query.FlightBasicQuery;
 import org.omidmohebbise.axon.example1.query.model.FlightEntity;
 import org.omidmohebbise.axon.example1.query.model.repository.FlightRepo;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
